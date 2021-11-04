@@ -21,10 +21,10 @@
 title: 备忘录
 email: snippet0809@163.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Programming is an art
+  日复一日，必有精进
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: Spet87866461
+#twitter_username: Spet87866461
 github_username:  snippet0809
 
 # Build settings
