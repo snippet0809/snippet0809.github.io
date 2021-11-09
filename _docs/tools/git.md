@@ -1,13 +1,13 @@
 ---
 title: Git
-permalink: tools/git
+description: 版本管理工具
 ---
 ## 查看配置
 
 `git config --global --list`
 
-- --global：用户级别
-- --system：系统级别
+- global：用户级别
+- system：系统级别
 
 ## 配置代理
 
