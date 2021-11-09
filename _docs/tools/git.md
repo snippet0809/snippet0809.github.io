@@ -1,7 +1,8 @@
 ---
-title: Git
+title: Git 
 description: 版本管理工具
 ---
+
 ## 查看配置
 
 `git config --global --list`
@@ -21,3 +22,8 @@ description: 版本管理工具
 
 `git config --global --unset https.proxy`
 
+## git reset & git revert
+
+git reset ${versionId}：回退到指定版本，该版本之后的commit被舍弃
+
+git revert ${versionId}：撤销指定版本提交的内容，之后生成一个新的版本
