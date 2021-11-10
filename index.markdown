@@ -9,10 +9,11 @@ description: 日复一日，必有精进
 
 1. 语言基础
 2. 并发编程
+    - [synchronized关键字](lang/java/concurrent/synchronized)
 3. JVM
     - 内存分配
     - [垃圾收集](lang/java/jvm/GC)
-    
+
 ### GO
 
 1. 语言基础
