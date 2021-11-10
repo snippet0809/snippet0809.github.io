@@ -40,7 +40,7 @@ public class SynchronizedDemo {
         // 情况一：对象锁，被锁的是当前类的实例对象this
         synchronized(this) {
         }
-        // 情况二：类锁，被锁的是类对象SynchorizedDemo.class
+        // 情况二：类锁，被锁的是类对象SynchronizedDemo.class
         synchronized(this.getClass()){
         }
         // 情况三：对象锁，被锁的是自定义的实例对象lock
@@ -53,11 +53,10 @@ public class SynchronizedDemo {
 
 ## 四、synchronized实现原理
 
-对象头由`Mark Word`和`Class Metadata Address`组成，其中`Mark Word`存储了对象的HashCode、锁信息、分代年龄、GC标志等信息，
-`Class Metadata Address`是类型指针，指向类的元数据，jvm通过这个指针来确定对象是哪一个类的实例。
+在HotSpot虚拟机里，对象在堆内存中的存储布局可以分为三个部分：`对象头`、`实例数据`、`对齐填充`。
 
-锁也分不同状态，JDK6之前只有两个状态：无锁、有锁（重量级锁），而在JDK6之后对synchronized进行了优化，分为了四个状态：无锁状态、偏向锁、轻量级锁、重量级锁。
-锁的类型和状态在对象头`Mark Word`中都有记录，在申请锁、锁升级等过程中JVM都需要读取对象的`Mark Word`数据。
+对象头由`Mark Word`和`类型指针`组成，其中`Mark Word`存储了对象的HashCode、GC分代年龄、锁状态标志、线程持有的锁、偏向线程ID、
+偏向时间戳等信息，在32位虚拟机和64位虚拟机中分别占用32个和64个比特。`类型指针`指向对象的类型元数据，jvm通过这个指针来确定对象是哪个类的实例。
 
-每一个锁都对应一个Monitor对象，在HotSpot虚拟机中它是由ObjectMonitor实现的（C++实现）。每个对象都存在着一个Monitor与之关联，
-对象与其Monitor之间的关系有存在多种实现方式，如Monitor可以与对象一起创建销毁，也可在当线程试图获取对象锁时自动生成，但当一个Monitor被某个线程持有后，它便处于锁定状态。
+锁状态标志位（2个bit）共有五种：01（无锁定）、01（可偏向）、00（轻量级锁定）、10（重量级锁定）、11（GC标志） 。
+当`Mark Word`中锁状态标志位为00或10时，`Mark Word`中存放的主要内容为指向锁的指针。
