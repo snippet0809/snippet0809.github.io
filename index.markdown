@@ -10,7 +10,7 @@ description: 日复一日，必有精进
 1. 语言基础
 2. 并发编程
     - [关键字：synchronized](lang/java/concurrent/synchronized)
-    - JDK1.0多线程：java.lang.Thread & java.lang.Runnable
+    - [JDK1.0多线程：java.lang.Thread & java.lang.Runnable](lang/java/concurrent/thread)
     - JDK1.5多线程：java.util.concurrent包
     - JDK1.5原子包：java.util.concurrent.atomic包
     - JDK1.5locks包：java.util.concurrent.locks包

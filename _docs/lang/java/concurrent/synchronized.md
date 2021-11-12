@@ -21,7 +21,7 @@ description: synchronized关键字的作用、特性、用法以及实现原理
 
 ### 2、synchronized默认是偏向锁
 
-synchronized在jdk1.6之前是重量级锁，jdk1.6经过优化改为通过偏向锁实现
+synchronized在jdk1.6之前是重量级锁，jdk1.6经过优化改为默认使用偏向锁实现
 
 重量级锁：通过操作系统的Mutex Lock实现的锁。操作系统切换线程需要从用户态转换到核心态，代价大、效率低。
 
