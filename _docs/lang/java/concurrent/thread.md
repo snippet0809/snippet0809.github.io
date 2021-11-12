@@ -10,12 +10,12 @@ public class Thread implements Runnable {
 
     // 源码片段一：线程的六种状态
     public enum State {
-        NEW,
-        RUNNABLE,
-        BLOCKED,
-        WAITING,
-        TIMED_WAITING,
-        TERMINATED;
+        NEW,                // 新创建的Thread对象，未调用start()
+        RUNNABLE,           // 就绪（ready，调用start()后在线程池中等待CPU调度）和运行中（running，已获得CPU时间片）两种状态的统称
+        BLOCKED,            // 阻塞于锁
+        WAITING,            // 等待其它线程notify或interrupt
+        TIMED_WAITING,      // 等待指定时间后自动返回
+        TERMINATED;         // 执行完毕
     }
 
     // 源码片段二：run() & start()
@@ -35,7 +35,20 @@ public class Thread implements Runnable {
     }
 
     // 源码片段三：Thread类的一些常用方法
+    // 当前线程让出CPU时间片转为TIMED_WAITING，不释放对象锁
     public static native void sleep(long millis) throws InterruptedException;
+
+    // 当前线程让出CPU时间片转为READY，不释放对象锁
+    public static native void yield();
+
+    // 当前线程调用其它线程的join()/join(final long millis)，当前线程让出CPU时间片转为WAITING/TIMED_WAITING，不释放对象锁
+    // 被调用join()的线程执行完毕或者millis时间到，当前线程一般会进入RUNNABLE，也有可能进入BLOCKED（因为join是基于wait实现的）
+    public final void join() throws InterruptedException {
+        join(0);
+    }
+    public final synchronized void join(final long millis) throws InterruptedException {
+        // 方法实现省略
+    }
 }
 
 ```
