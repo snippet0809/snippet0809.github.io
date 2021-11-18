@@ -26,6 +26,23 @@ public interface Lock {
 
 ### ReentrantLock实现类
 
+```java
+public class ReentrantLock implements Lock, java.io.Serializable {
+    
+    // 默认非公平锁
+    public ReentrantLock() {
+        sync = new NonfairSync();
+    }
+    
+    // true-公平锁，false-非公平锁
+    public ReentrantLock(boolean fair) {
+        sync = fair ? new FairSync() : new NonfairSync();
+    }
+    
+    // 其它实现省略
+}
+```
+
 ### 1、ReentrantLock和synchronized的区别
 
 - ReentrantLock使用灵活但需要手动加解锁，synchronized自动加解锁但使用上不灵活
@@ -37,7 +54,20 @@ ps：**jdk1.6对synchronized优化后，在低并发的情况下synchronized性�
 
 ### 2、使用示例
 
-TODO
+```java
+    Lock lock = new ReentrantLock();
+    if (lock.tryLock()) {
+        try {
+            // 同步处理逻辑
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    } else {
+        // 尝试加锁失败的情况
+    }    
+```
 
 ## 二、ReadWriteLock接口 & ReentrantReadWriteLock实现类
 
@@ -54,4 +84,23 @@ public interface ReadWriteLock {
 
 ### ReentrantReadWriteLock实现类
 
-TODO
+```java
+public class ReentrantReadWriteLock implements ReadWriteLock, java.io.Serializable {
+
+    private final ReentrantReadWriteLock.ReadLock readerLock;
+    private final ReentrantReadWriteLock.WriteLock writerLock;
+
+    public static class ReadLock implements Lock, java.io.Serializable {
+        // 实现省略
+    }
+
+    public static class WriteLock implements Lock, java.io.Serializable {
+        // 实现省略
+    }
+
+    public ReentrantReadWriteLock.WriteLock writeLock() { return writerLock; }
+    public ReentrantReadWriteLock.ReadLock  readLock()  { return readerLock; }
+
+    // 其它实现省略 
+}
+```
