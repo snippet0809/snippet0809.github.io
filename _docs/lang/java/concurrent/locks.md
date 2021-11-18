@@ -43,7 +43,7 @@ public class ReentrantLock implements Lock, java.io.Serializable {
 }
 ```
 
-### 1、ReentrantLock和synchronized的区别
+### ReentrantLock和synchronized的区别
 
 - ReentrantLock使用灵活但需要手动加解锁，synchronized自动加解锁但使用上不灵活
 - ReentrantLock可以响应中断，synchronized不可以
@@ -52,7 +52,7 @@ public class ReentrantLock implements Lock, java.io.Serializable {
 
 ps：**jdk1.6对synchronized优化后，在低并发的情况下synchronized性能已经和ReentrantLock相当了，高并发情况下ReentrantLock性能会占优**
 
-### 2、使用示例
+### 使用示例
 
 ```java
     Lock lock = new ReentrantLock();
@@ -65,7 +65,7 @@ ps：**jdk1.6对synchronized优化后，在低并发的情况下synchronized性�
             lock.unlock();
         }
     } else {
-        // 尝试加锁失败的情况
+        // 加锁失败的情况
     }    
 ```
 
@@ -103,4 +103,21 @@ public class ReentrantReadWriteLock implements ReadWriteLock, java.io.Serializab
 
     // 其它实现省略 
 }
+```
+
+### 示例
+
+```java
+    Lock writeLock = new ReentrantReadWriteLock().writeLock();
+    if (writeLock.tryLock()) {
+        try {
+            // 同步写逻辑
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            writeLock.unlock();
+        }
+    } else {
+        // 加锁失败的情况
+    }
 ```
