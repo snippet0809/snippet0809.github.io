@@ -1,27 +1,19 @@
 ---
-title: jdk1.2容器类
-description: java.util.Collection & java.util.Map
+title: jdk1.2集合
+description: java.util.Collection
 ---
 
-## 一、简介
+## 一、Collection接口
 
-自jdk1.2开始，java加入了容器类。容器类分为两种，分别为java.util.Collection和java.util.Map。
+Collection\<E>自jdk1.2加入，当时还有两个重要的子接口java.util.List\<E>和java.util.Set\<E>一并加入，jdk1.5加入了第三个重要子接口java.util.Queue\<E>
+
+**List中元素可重复，Set中元素不可重复，**这是两者最主要的区别
 
 ```java
 public interface Collection<E> extends Iterable<E> {
     // 接口内容省略
 }
 
-public interface Map<K,V> {
-    // 接口内容省略
-}
-```
-
-## 二、Collection接口
-
-Collection接口有三个重要的子接口，分别为java.util.List\<E>、java.util.Set\<E>和java.util.Queue\<E>
-
-```java
 public interface List<E> extends Collection<E> {
     // 接口内容省略
 }
@@ -35,7 +27,7 @@ public interface Queue<E> extends Collection<E> {
 }
 ```
 
-### 1、元素可重的List
+## 二、List接口
 
 List接口有两个重要的实现类：java.util.ArrayList和java.util.LinkedList
 
@@ -44,7 +36,7 @@ List接口有两个重要的实现类：java.util.ArrayList和java.util.LinkedLi
 1. 自jdk1.0开始就有的java.util.Vector\<E>后来也实现了List接口，Vector是线程安全的，但这个古老的类不推荐开发者再使用。
 2. java.util.RandomAccess接口里面没有任何内容，它只是一个标志接口，实现了该接口的Collection支持快速随机访问，且实现了该接口的List使用for循环遍历的效率高于使用迭代器遍历
 
-#### 1-1、java.util.ArrayList
+### 1、java.util.ArrayList
 
 jdk17中ArrayList部分源码，行为上和jdk8一样，但代码写的比jdk8精简多了
 
@@ -103,7 +95,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAcce
 }
 ```
 
-#### 1-2、java.util.LinkedList
+### 2、java.util.LinkedList
 
 jdk17中LinkedList部分源码。**jdk1.2时它只是简单的一个List，jdk1.5时它也成了一个Queue，jdk1.6时它还成了一个Deque**
 
@@ -129,98 +121,41 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements List<E>,
         }
     }
 
-    // 
-    // jdk1.2时它只是简单的一个List。方法实现省略
-    // 
-
     public boolean add(E e) {}
 
     public E get(int index) {}
 
     public boolean remove(Object o) {}
 
-
-    // 
-    // jdk1.5时它也成了一个Queue。方法实现省略
-    //
-
-    // 和add(E e)一样都是在队首插入一个元素。在容量已满的情况下，add()会抛出IllegalStateException，offer()只会返回false
-    public boolean offer(E e) {}
-
-    // 获取队首元素，但不移除，队列为空时返回null
-    public E peek() {}
-
-    // 获取队首元素，但不移除，队列为空时抛出异常
-    public E element() {}
-
-    // 移除队首元素，队列为空时返回null
-    public E poll() {}
-
-    // 移除队首元素，队列为空时抛出异常
-    public E remove() {}
-
-
-    //
-    // jdk1.6后，它还成了一个Deque。方法实现省略
-    //
-
-    // 插入元素。在队首插入一个元素，如果元素为null，抛出NullPointerException
-    public void addFirst(E e) {}
-
-    // 插入元素。在队末插入一个元素，如果元素为null，抛出NullPointerException
-    public void addLast(E e) {}
-
-    // 插入元素。在队首插入一个元素，容量满时返回false
-    public boolean offerFirst(E e) {}
-
-    // 插入元素。在队末插入一个元素，容量满时返回false
-    public boolean offerLast(E e) {}
-
-    
-    // 获取元素。获取队首元素，但不移除，队列为空时抛出NoSuchElementException
-    public E getFirst() {}
-
-    // 获取元素。获取队末元素，但不移除，队列为空时抛出NoSuchElementException
-    public E getLast() {}
-
-    // 获取元素。获取队首元素，但不移除，队列为空时返回null
-    public E peekFirst() {}
-
-    // 获取元素。获取队末元素，但不移除，队列为空时返回null
-    public E peekLast() {}
-
-
-    // 移除元素。移除队首元素，队列为空抛出NoSuchElementException
-    public E removeFirst() {}
-
-    // 移除元素。移除队首元素，队列为空抛出NoSuchElementException
-    public E removeLast() {}
-
-    // 移除元素。移除队首元素，队列为空时返回null
-    public E pollFirst() {}
-
-    // 移除元素。移除队末元素，队列为空时返回null
-    public E pollLast() {}
-
-    // 移除元素。从头部开始遍历Deque，移除第一个和参数相等的元素，未发现相等元素返回false
-    public boolean removeFirstOccurrence(Object o) {}
-
-    // 移除元素。从尾部开始遍历Deque，移除第一个和参数相等的元素，未发现相等元素返回false
-    public boolean removeLastOccurrence(Object o) {}
-
-
-    // 栈操作。出栈，即移除队首元素，等价于removeFirst()，队列为空时抛出NoSuchElementException
-    public void push(E e) {}
-    // 栈操作。入栈，即放入队首元素，等价于addFirst()，如果元素为null，则抛出NullPointerException，如果栈空间受到限制，则抛出IllegalStateException
-    public E pop() {}
-
-
-    // 其它实现忽略
+    // ***其它实现省略***
 }
 ```
 
-### 2、元素不可重的Set
+## 三、java.util.Set\<E>
 
-### 3、队列Queue
+### 1、java.util.HashSet
 
-## 三、Map接口
+- 存放的元素是无序的
+- 根据元素的HashCode值决定元素的存储位置
+
+### 2、java.util.LinkedHashSet
+
+- 使用链表按插入顺序维护元素顺序
+- 根据元素的HashCode值决定元素的存储位置
+
+### 3、java.util.TreeSet
+
+```java
+public class TreeSet<E> extends AbstractSet<E> implements NavigableSet<E>, Cloneable, java.io.Serializable {
+
+    // 底层使用TreeMap实现的
+    public TreeSet() {
+        this(new TreeMap<E,Object>());
+    }
+
+    // 默认按自然顺序维护元素顺序，可自定义比较器决定元素排列顺序
+    public TreeSet(Comparator<? super E> comparator) {
+        this(new TreeMap<>(comparator));
+    }   
+}
+```
