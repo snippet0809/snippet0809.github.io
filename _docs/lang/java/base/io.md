@@ -5,9 +5,15 @@ description: java.io包 & java.nio包
 
 ## 一、io和nio的区别
 
+io|nio  
+-|-
+面向流|面向缓冲
+阻塞IO|非阻塞IO
+无|选择器
+
 ### 1、io面向流，nio面向缓冲区
 
-io面向流意味着每次从流中读一个或多个字节，直至读取所有字节，它们没有被缓存在任何地方。此外，它不能前后移动流中的数据，如果需要前后移动从流中读取的数据，需要先将它缓存到一个缓冲区。 nio的缓冲导向方法略有不同，数据读取到一个它稍后处理的缓冲区，需要时可在缓冲区中前后移动，这就增加了处理过程中的灵活性。但是nio需要检查缓冲区中是否包含所有需要处理的数据，还要确保当更多的数据读入缓冲区时不会覆盖尚未处理的数据。
+io面向流意味着每次从流中读写数据，必须一次读写完毕，并且不能前后移动流中的数据。nio是将读写的数据放进一个缓冲区，需要时可在缓冲区中前后移动。nio需要检查缓冲区中是否包含所有需要处理的数据，还要确保当更多的数据读入缓冲区时不会覆盖尚未处理的数据。
 
 ### 2、io是阻塞IO，nio是非阻塞IO
 
@@ -15,8 +21,47 @@ io的各种流是阻塞的，当一个线程调用read()或write()时，该线�
 
 ### 3、nio的选择器允许一个单独的线程来监视多个输入通道
 
-Java NIO的选择器允许一个单独的线程来监视多个输入通道，你可以注册多个通道使用一个选择器，然后使用一个单独的线程来“选择”通道：这些通道里已经有可以处理的输入，或者选择已准备写入的通道。这种选择机制，使得一个单独的线程很容易来管理多个通道。
+nio的选择器允许一个单独的线程来监视多个输入通道，你可以注册多个通道使用一个选择器，然后使用一个单独的线程来“选择”通道：这些通道里已经有可以处理的输入，或者选择已准备写入的通道。这种选择机制，使得一个单独的线程很容易来管理多个通道。
 
 ## 二、java.io包
 
+jdk1.0只提供了通过字节流读写的方法，jdk1.1提供了通过字符流读写的方法。
+
+```java
+// 字节流读
+public abstract class InputStream implements Closeable { 
+    // 抽象类内容省略
+}
+
+// 字节流写
+public abstract class OutputStream implements Closeable, Flushable {
+    // 抽象类内容省略
+}
+
+// 字符流读
+public abstract class Reader implements Readable, Closeable {
+    // 抽象列内容省略
+}
+
+// 字符流写
+public abstract class Writer implements Appendable, Closeable, Flushable {
+    // 抽象类内容省略
+}
+```
+
 ## 三、java.nio包
+
+最常用的缓冲区类型是ByteBuffer。除了ByteBuffer，还有ShortBuffer、IntBuffer、LongBuffer、FloatBuffer、DoubleBuffer、CharBuffer。
+
+```java
+public abstract class ByteBuffer extends Buffer implements Comparable<ByteBuffer> {
+    
+    public static ByteBuffer allocate(int capacity) {
+        if (capacity < 0)
+            throw new IllegalArgumentException();
+        return new HeapByteBuffer(capacity, capacity);
+    }
+
+    // ***其它内容省略***
+}
+```
