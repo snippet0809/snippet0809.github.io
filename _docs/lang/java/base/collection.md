@@ -10,6 +10,8 @@ Collection\<E>自jdk1.2加入，当时还有两个重要的子接口java.util.Li
 **List中元素可重复，Set中元素不可重复，**这是两者最主要的区别
 
 ```java
+// 增强for循环能迭代Collection是因为其继承了Iterable
+// 实际上增强for循环可迭代的范围就是Iterable类型和数组类型
 public interface Collection<E> extends Iterable<E> {
     // 接口内容省略
 }
@@ -91,7 +93,7 @@ public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAcce
         }
     }
 
-    // 其它实现省略
+    // ***其它实现省略***
 }
 ```
 
@@ -148,14 +150,11 @@ public class LinkedList<E> extends AbstractSequentialList<E> implements List<E>,
 ```java
 public class TreeSet<E> extends AbstractSet<E> implements NavigableSet<E>, Cloneable, java.io.Serializable {
 
-    // 底层使用TreeMap实现的
-    public TreeSet() {
-        this(new TreeMap<E,Object>());
-    }
-
-    // 默认按自然顺序维护元素顺序，可自定义比较器决定元素排列顺序
+    // 底层使用TreeMap实现的。默认按自然顺序维护元素顺序，可自定义比较器决定元素排列顺序
     public TreeSet(Comparator<? super E> comparator) {
         this(new TreeMap<>(comparator));
     }   
+
+    // ***其它实现省略***
 }
 ```
