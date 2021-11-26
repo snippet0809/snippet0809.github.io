@@ -150,13 +150,11 @@ public class HashMap<K,V> extends AbstractMap<K,V> implements Map<K,V>, Cloneabl
 
 ## 三、TreeMap
 
-默认根据key自然排序，也可自定义排序规则。TreeMap实现了红黑树的结构，形成了一棵二叉树。如果没有自定义排序规则，注意K一定要是Comparator的子类。
+默认根据key自然排序，也可自定义排序规则。TreeMap实现了红黑树的结构，形成了一棵二叉树。如果没有自定义排序规则，注意key值一定要是Comparator的子类。
 
 ```java
 public class TreeMap<K,V> extends AbstractMap<K,V> implements NavigableMap<K,V>, Cloneable, java.io.Serializable {
-
-
-
+    
     public TreeMap(Comparator<? super K> comparator) {
         this.comparator = comparator;
     }
