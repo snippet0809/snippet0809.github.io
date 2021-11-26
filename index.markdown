@@ -12,14 +12,14 @@ description: 日复一日，必有精进
     - [jdk1.2集合二：java.util.Map](lang/java/base/map)
     - [jdk1.5队列 & jdk1.6双端队列：java.util.Queue & java.util.Deque](lang/java/base/queue)
     - [jdk1.0 io & jdk1.4 nio：java.io包 & java.nio包](lang/java/base/io)
-    - [反射](lang/java/base/reflect)
     - [jdk1.0类加载器：java.lang.ClassLoader](lang/java/base/classLoader)
+    - [jdk1.1反射：java.lang.Class & java.lang.reflect包](lang/java/base/reflect)
 2. 并发编程
     - [关键字：synchronized](lang/java/concurrent/synchronized)
     - [JDK1.0多线程：java.lang.Thread & java.lang.Runnable](lang/java/concurrent/thread)
-    - [JDK1.5J.U.C：java.util.concurrent包](lang/java/concurrent/J.U.C)
-    - [JDK1.5原子包：java.util.concurrent.atomic包](lang/java/concurrent/atomic)
-    - [JDK1.5locks包：java.util.concurrent.locks包](lang/java/concurrent/locks)
+    - [JDK1.5线程池：java.util.concurrent包](lang/java/concurrent/J.U.C)
+    - [JDK1.5原子类：java.util.concurrent.atomic包](lang/java/concurrent/atomic)
+    - [JDK1.5并发锁：java.util.concurrent.locks包](lang/java/concurrent/locks)
 3. JVM
     - 内存分配
     - [垃圾收集](lang/java/jvm/GC)

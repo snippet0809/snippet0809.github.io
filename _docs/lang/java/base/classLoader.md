@@ -2,7 +2,7 @@
 title: jdk1.0 类加载器
 description: java.lang.ClassLoader
 ---
-## 一、类声明周期
+## 一、类生命周期
 
 加载 -> 连接（验证->准备->解析） -> 初始化 -> 使用 -> 卸载
 
@@ -14,7 +14,7 @@ description: java.lang.ClassLoader
 2. 拓展类加载器：由sun.misc.Launcher$ExtClassLoader实现，加载位于/jre/lib/ext目录中的或者java.ext.dirs系统变量所指定的目录下的拓展类库
 3. 应用类加载器：由sun.misc.Launcher$AppClassLoader实现，加载用户路径(ClassPath)上所指定的类库
 
-## 双亲委派机制
+## 三、双亲委派机制
 
 ```java
 public abstract class ClassLoader {
@@ -40,9 +40,8 @@ public abstract class ClassLoader {
                     // ClassNotFoundException thrown if class not found
                     // from the non-null parent class loader
                 }
-
+                // 三、自己加载
                 if (c == null) {
-                    // 三、自己加载
                     long t1 = System.nanoTime();
                     c = findClass(name);
 
@@ -52,7 +51,7 @@ public abstract class ClassLoader {
                     sun.misc.PerfCounter.getFindClasses().increment();
                 }
             }
-            // 是否进行解析
+            // 四、是否进行解析
             if (resolve) {
                 resolveClass(c);
             }
@@ -66,4 +65,4 @@ public abstract class ClassLoader {
 
 应用类加载器的双亲为扩展类加载器，扩展类加载器的双亲为启动类加载器。
 
-在类加载的时候，系统会判断当前类是否已经被加载，如果被加载，就会直接返回可用的类，否则就会尝试加载。在尝试加载时，会先请求双亲处理，如果双亲请求失败，则会自己加载。
+在类加载的时候，系统会判断当前类是否已经被加载，如果被加载，就会直接返回可用的类，否则就会尝试加载。在尝试加载时，会先请求双亲处理，如果双亲请求失败，则会自己加载。**双亲委派机制防止了类重复加载。**
