@@ -8,7 +8,7 @@ description: java.lang.ClassLoader
 
 加载、连接、初始化三个过程被称为类加载过程
 
-## 二、类加载类分类
+## 二、类加载器分类
 
 1. 启动类加载器（根类加载器）：JVM的一部分，使用C++编写，加载位于/jre/lib目录中或者被参数-Xbootclasspath所指定的目录下的核心Java类库，例如rt.jar
 2. 拓展类加载器：由sun.misc.Launcher$ExtClassLoader实现，加载位于/jre/lib/ext目录中的或者java.ext.dirs系统变量所指定的目录下的拓展类库
