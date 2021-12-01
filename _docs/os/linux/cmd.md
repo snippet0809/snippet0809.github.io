@@ -9,7 +9,7 @@ description: Linux下常用命令
 
 netstat用于显示tcp，udp的端口和进程等相关情况
 
-netstat常用来查看端口占用：`netstat -tunlp | grep ${port}`
+netstat常用来查看端口占用：`netstat -tunlp | grep {port}`
 
 参数：
 
@@ -19,13 +19,19 @@ netstat常用来查看端口占用：`netstat -tunlp | grep ${port}`
 - -l：仅列出在Listen(监听)的服务状态
 - -p：显示建立相关链接的程序名
 
+## 2、ssh（远程连接）
+
+`ssh -p:{port} {username}@{host}`
+
+当端口为ssh默认端口时（22）时可以省略-p参数
+
 ## 二、文件相关
 
 ### 1、scp（文件拷贝）
 
 scp是secure copy的缩写，是基于ssh的文件拷贝命令
 
-`scp [可选参数] source_file target_file`
+`scp [可选参数] {source_file} {target_file}`
 
 可选参数：
 
@@ -35,4 +41,4 @@ scp是secure copy的缩写，是基于ssh的文件拷贝命令
 
 lsof(list open files)是一个列出当前系统打开文件的工具
 
-lsof常用来查看端口占用：`lsof -i:${port}`
+lsof常用来查看端口占用：`lsof -i:{port}`
