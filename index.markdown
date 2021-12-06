@@ -23,6 +23,8 @@ description: 日复一日，必有精进
 3. JVM
     - 内存分配
     - [垃圾收集](lang/java/jvm/GC)
+4. 框架
+    - [Mybatis-Plus](https://github.com/baomidou/mybatis-plus)
 
 ### GO
 
@@ -38,6 +40,7 @@ description: 日复一日，必有精进
 ## 三、编程工具
 
 - [Git](tools/git)
+- [GitHub Packages](tools/github_packages)
 
 ## 四、操作系统
 
