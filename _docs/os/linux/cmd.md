@@ -21,7 +21,7 @@ netstat常用来查看端口占用：`netstat -tunlp | grep {port}`
 
 ## 2、ssh（远程连接）
 
-`ssh -p:{port} {username}@{host}`
+`ssh [-p:{port}] {username}@{host}`
 
 当端口为ssh默认端口时（22）时可以省略-p参数
 
