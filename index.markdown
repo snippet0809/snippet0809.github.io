@@ -24,7 +24,7 @@ description: 日复一日，必有精进
     - 内存分配
     - [垃圾收集](lang/java/jvm/GC)
 4. 框架
-    - [Mybatis-Plus](https://github.com/baomidou/mybatis-plus)
+    - [Mybatis-Plus](lang/java/framework/mybatis-plus)
     - Spring
     - Spring Boot
     - Spring Cloud
