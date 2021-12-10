@@ -26,7 +26,7 @@ description: 日复一日，必有精进
 4. 框架
     - [Mybatis-Plus](lang/java/framework/mybatis-plus)
     - Spring
-    - Spring Boot
+    - [Spring Boot](lang/java/framework/SpringBoot)
     - Spring Cloud
 
 ### GO
