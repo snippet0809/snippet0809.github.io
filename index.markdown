@@ -8,12 +8,13 @@ description: 日复一日，必有精进
 ### JAVA
 
 1. 语言基础
+    - [jdk1.0类加载器：java.lang.ClassLoader](lang/java/base/classLoader)
+    - [jdk1.0 io & jdk1.4 nio：java.io包 & java.nio包](lang/java/base/io)
+    - [jdk1.1反射：java.lang.reflect包](lang/java/base/reflect)
     - [jdk1.2集合一：java.util.Collection](lang/java/base/collection)
     - [jdk1.2集合二：java.util.Map](lang/java/base/map)
     - [jdk1.5队列 & jdk1.6双端队列：java.util.Queue & java.util.Deque](lang/java/base/queue)
-    - [jdk1.0 io & jdk1.4 nio：java.io包 & java.nio包](lang/java/base/io)
-    - [jdk1.0类加载器：java.lang.ClassLoader](lang/java/base/classLoader)
-    - [jdk1.1反射：java.lang.Class & java.lang.reflect包](lang/java/base/reflect)
+    - [jdk8 Stream API：java.util.stream包](lang/java/base/stream)
 2. 并发编程
     - [关键字：synchronized](lang/java/concurrent/synchronized)
     - [JDK1.0多线程：java.lang.Thread & java.lang.Runnable](lang/java/concurrent/thread)
