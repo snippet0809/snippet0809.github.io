@@ -40,7 +40,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 
 ## 二、带返回值的线程
 
-### Callable\<V>接口
+### 1、Callable\<V>接口
 
 基于Runnable接口创建的线程没有返回值，Callable接口可以实现带返回值的线程
 
@@ -57,7 +57,7 @@ public interface Callable<V> {
 }
 ```
 
-## Future\<V>接口和FutureTask\<V>类
+### 2、Future\<V>接口和FutureTask\<V>类
 
 Futuer\<V>表示线程的执行结果，使用Futuer\<V>::get()可以获取线程执行后的返回值，这个方法会阻塞
 
@@ -89,7 +89,7 @@ public interface RunnableFuture<V> extends Runnable, Future<V> {
 }
 ```
 
-## 示例
+### 3、示例
 
 ```java
     Callable<String> callable = new Callable<String>() {
@@ -109,3 +109,16 @@ public interface RunnableFuture<V> extends Runnable, Future<V> {
     }
     System.out.println(result);
 ```
+
+## 三、线程安全的数据结构
+
+### 1、线程安全的Collection
+
+- CopyOnWriteArrayList/CopyOnWriteArraySet
+- ConcurrentLinkedQueue/ConcurrentLinkedDeque
+
+此外，Collections.synchronizedList(List\<T> list)可以将非线程安全的List转为线程安全的List，转换后的List具体类型是Collections内部定义的SynchronizedList（或ynchronizedRandomAccessList），SynchronizedList内部使用synchronized同步块保证线程安全。
+
+### 2、线程安全的Map
+
+- ConcurrentHashMap

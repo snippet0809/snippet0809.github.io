@@ -1,10 +1,146 @@
 ---
-title: JAVA 8 Stream API
-description: java.util.stream包
+title: java8函数式编程
+description: java.util.function包 & java.util.stream包
 ---
-## 一、Stream接口
 
-jdk8新增了Stream API，使用方法上类似SQL
+`函数式编程`对应的`指令式编程`，它可以使代码更加简洁
+
+## 一、java.util.function.Predicate接口
+
+```java
+@FunctionalInterface
+public interface Predicate<T> {
+
+    // t是否满足条件，判断条件需要实现类给出
+    boolean test(T t);
+
+    // 与
+    default Predicate<T> and(Predicate<? super T> other) {
+        Objects.requireNonNull(other);
+        return (t) -> test(t) && other.test(t);
+    }
+
+    // 非
+    default Predicate<T> negate() {
+        return (t) -> !test(t);
+    }
+
+    // 或
+    default Predicate<T> or(Predicate<? super T> other) {
+        Objects.requireNonNull(other);
+        return (t) -> test(t) || other.test(t);
+    }
+
+    // ==
+    static <T> Predicate<T> isEqual(Object targetRef) {
+        return (null == targetRef)
+                ? Objects::isNull
+                : object -> targetRef.equals(object);
+    }
+
+    // jdk11
+    @SuppressWarnings("unchecked")
+    static <T> Predicate<T> not(Predicate<? super T> target) {
+        Objects.requireNonNull(target);
+        return (Predicate<T>)target.negate();
+    }
+}
+```
+
+## 二、java.util.function.Consumer接口
+
+```java
+@FunctionalInterface
+public interface Consumer<T> {
+
+    void accept(T t);
+
+    default Consumer<T> andThen(Consumer<? super T> after) {
+        Objects.requireNonNull(after);
+        return (T t) -> { accept(t); after.accept(t); };
+    }
+}
+
+```
+
+## 三、java.util.function.Function接口
+
+```java
+@FunctionalInterface
+public interface Function<T, R> {
+
+    R apply(T t);
+
+    default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
+        Objects.requireNonNull(before);
+        return (V v) -> apply(before.apply(v));
+    }
+
+    default <V> Function<T, V> andThen(Function<? super R, ? extends V> after) {
+        Objects.requireNonNull(after);
+        return (T t) -> after.apply(apply(t));
+    }
+
+    static <T> Function<T, T> identity() {
+        return t -> t;
+    }
+}
+```
+
+## 四、java.util.Optional类
+
+Optional是jdk8新增的一个类，可以很好地防止空指针异常。可以把Optional理解为一个容器，如果值存在则isPresent()方法会返回true，调用get()方法会返回该对象。
+
+```java
+public final class Optional<T> {
+
+    private static final Optional<?> EMPTY = new Optional<>();
+    private final T value;
+
+    private Optional() {
+        this.value = null;
+    }
+
+    public static<T> Optional<T> empty() {
+        @SuppressWarnings("unchecked")
+        Optional<T> t = (Optional<T>) EMPTY;
+        return t;
+    }
+
+    private Optional(T value) {
+        this.value = Objects.requireNonNull(value);
+    }
+
+    public static <T> Optional<T> of(T value) {
+        return new Optional<>(value);
+    }
+
+    public static <T> Optional<T> ofNullable(T value) {
+        return value == null ? empty() : of(value);
+    }
+
+    public T get() {
+        if (value == null) {
+            throw new NoSuchElementException("No value present");
+        }
+        return value;
+    }
+
+    public boolean isPresent() {
+        return value != null;
+    }
+
+    public void ifPresent(Consumer<? super T> consumer) {
+        if (value != null)
+            consumer.accept(value);
+    }
+}
+
+```
+
+## 五、java.util.stream.Stream接口
+
+### 1、Stream接口部分源码
 
 ```java
 public interface Stream<T> extends BaseStream<T, Stream<T>> {
@@ -13,17 +149,11 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
 
     <R> Stream<R> map(Function<? super T, ? extends R> mapper);
 
+    // 类似的还有mapToLong()、mapToDouble()
     IntStream mapToInt(ToIntFunction<? super T> mapper);
 
-    LongStream mapToLong(ToLongFunction<? super T> mapper);
-
-    DoubleStream mapToDouble(ToDoubleFunction<? super T> mapper);
-
+    // 类似的还有flatMapToLong()、flatMaptoDouble()
     IntStream flatMapToInt(Function<? super T, ? extends IntStream> mapper);
-
-    LongStream flatMapToLong(Function<? super T, ? extends LongStream> mapper);
-
-    DoubleStream flatMapToDouble(Function<? super T, ? extends DoubleStream> mapper);
 
     Stream<T> distinct();
 
@@ -136,7 +266,7 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
 }
 ```
 
-## 二、java.util.Collection转Stream
+### 2、java.util.Collection转Stream
 
 ```java
 public interface Collection<E> extends Iterable<E> {
@@ -156,5 +286,17 @@ public interface Collection<E> extends Iterable<E> {
     }
 
     // ***其它实现省略***
+}
+```
+
+### 3、使用示例
+
+```java
+public class StreamDemo {
+
+    public void functionalProgramming(List<String> list) {
+        // list中是有任一元素满足Predicate就返回true
+        boolean contains = list.stream().anyMatch("abc"::equals);
+    }
 }
 ```

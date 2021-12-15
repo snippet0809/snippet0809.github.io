@@ -14,7 +14,7 @@ description: 日复一日，必有精进
     - [jdk1.2集合一：java.util.Collection](lang/java/base/collection)
     - [jdk1.2集合二：java.util.Map](lang/java/base/map)
     - [jdk1.5队列 & jdk1.6双端队列：java.util.Queue & java.util.Deque](lang/java/base/queue)
-    - [jdk8 Stream API：java.util.stream包](lang/java/base/stream)
+    - [jdk8函数式编程：java.util.function包 & java.util.stream包](lang/java/base/functional)
 2. 并发编程
     - [关键字：synchronized](lang/java/concurrent/synchronized)
     - [JDK1.0多线程：java.lang.Thread & java.lang.Runnable](lang/java/concurrent/thread)
