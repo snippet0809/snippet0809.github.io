@@ -3,7 +3,7 @@ title: java8函数式编程
 description: java.util.function包 & java.util.stream包
 ---
 
-`函数式编程`对应的`指令式编程`，它可以使代码更加简洁
+`函数式编程`对应的是`指令式编程`，函数式编程可以使代码更加简洁
 
 ## 一、java.util.function.Predicate接口
 
