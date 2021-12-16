@@ -5,7 +5,86 @@ description: java.util.function包 & java.util.stream包
 
 `函数式编程`对应的是`指令式编程`，函数式编程可以使代码更加简洁
 
-## 一、java.util.function.Predicate接口
+## 一、java.util.function.Function接口
+
+函数式编程最重要的一个特性就是将函数作为参数，在java中的语法就是传入new Function(){}匿名内部类
+
+Function是比较泛用的接口，jdk8还有一些延伸接口（以下接口和Function非继承关系）
+
+- public interface IntFunction\<R> { R apply(int value); }
+- public interface LongFunction\<R> { R apply(long value); }
+- public interface DoubleFunction\<R> { R apply(double value); }
+- public interface BiFunction\<T, U, R> { R apply(T t, U u); }
+
+- public interface IntToLongFunction { long applyAsLong(int value); }
+- public interface IntToDoubleFunction { double applyAsDouble(int value); }
+
+- public interface LongToIntFunction { int applyAsInt(long value); }
+- public interface LongToDoubleFunction { double applyAsDouble(long value); }
+
+- public interface DoubleToIntFunction { int applyAsInt(double value); }
+- public interface DoubleToLongFunction { long applyAsLong(double value); }
+
+- public interface ToIntFunction\<T> { int applyAsInt(T value); }
+- public interface ToLongFunction\<T> { long applyAsLong(T value); }
+- public interface ToDoubleFunction\<T> {double applyAsDouble(T value); }
+
+- public interface ToIntBiFunction<T, U> { int applyAsInt(T t, U u); }
+- public interface ToLongBiFunction<T, U> { long applyAsLong(T t, U u); }
+- public interface ToDoubleBiFunction<T, U> { double applyAsDouble(T t, U t); }
+
+```java
+@FunctionalInterface
+public interface Function<T, R> {
+
+    R apply(T t);
+
+    default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
+        Objects.requireNonNull(before);
+        return (V v) -> apply(before.apply(v));
+    }
+
+    default <V> Function<T, V> andThen(Function<? super R, ? extends V> after) {
+        Objects.requireNonNull(after);
+        return (T t) -> after.apply(apply(t));
+    }
+
+    static <T> Function<T, T> identity() {
+        return t -> t;
+    }
+}
+```
+
+## 二、java.util.function.Consumer接口
+
+Consumer是特殊的Function，它在函数式编程中固定函数的返回值为void，jdk8还提供了其它延伸接口：
+
+- public interface IntConsumer { void accept(int value); }
+- public interface LongConsumer { void accept(long value); }
+- public interface DoubleConsumer { void accept(double value); }
+- public interface BiConsumer<T, U> { void accept(T t, U u); }
+
+```java
+@FunctionalInterface
+public interface Consumer<T> {
+
+    void accept(T t);
+
+    default Consumer<T> andThen(Consumer<? super T> after) {
+        Objects.requireNonNull(after);
+        return (T t) -> { accept(t); after.accept(t); };
+    }
+}
+```
+
+## 三、java.util.function.Predicate接口
+
+Predicate是特殊的Function，它在函数式编程中固定函数的返回值为boolean，jdk8还提供了其它延伸接口：
+
+- public interface IntPredicate { boolean test(int value); }
+- public interface LongPredicate { boolean test(long value); }
+- public interface DoublePredicate { boolean test(double value); }
+- public interface BiPredicate<T, U> { boolean test(T t, U u); }
 
 ```java
 @FunctionalInterface
@@ -47,47 +126,24 @@ public interface Predicate<T> {
 }
 ```
 
-## 二、java.util.function.Consumer接口
+## 四、java.util.function.Supplier接口
+
+Supplier是特殊的Function，它在函数式编程中固定函数参数列表为空，jdk8还提供了其它延伸接口：
+
+- public interface IntSupplier { int getAsInt(); }
+- public interface LongSupplier { long getAsLong(); }
+- public interface DoubleSupplier { double getAsDouble(); }
+- public interface BooleanSupplier { boolean getAsBoolean(); }
 
 ```java
 @FunctionalInterface
-public interface Consumer<T> {
+public interface Supplier<T> {
 
-    void accept(T t);
-
-    default Consumer<T> andThen(Consumer<? super T> after) {
-        Objects.requireNonNull(after);
-        return (T t) -> { accept(t); after.accept(t); };
-    }
-}
-
-```
-
-## 三、java.util.function.Function接口
-
-```java
-@FunctionalInterface
-public interface Function<T, R> {
-
-    R apply(T t);
-
-    default <V> Function<V, R> compose(Function<? super V, ? extends T> before) {
-        Objects.requireNonNull(before);
-        return (V v) -> apply(before.apply(v));
-    }
-
-    default <V> Function<T, V> andThen(Function<? super R, ? extends V> after) {
-        Objects.requireNonNull(after);
-        return (T t) -> after.apply(apply(t));
-    }
-
-    static <T> Function<T, T> identity() {
-        return t -> t;
-    }
+    T get();
 }
 ```
 
-## 四、java.util.Optional类
+## 五、java.util.Optional类
 
 Optional是jdk8新增的一个类，可以很好地防止空指针异常。可以把Optional理解为一个容器，如果值存在则isPresent()方法会返回true，调用get()方法会返回该对象。
 
@@ -138,7 +194,9 @@ public final class Optional<T> {
 
 ```
 
-## 五、java.util.stream.Stream接口
+## 六、java.util.stream.Stream接口
+
+Stream是对数据的一种抽象，它使用一种类似SQL的方式对数据进行处理
 
 ### 1、Stream接口部分源码
 
@@ -270,6 +328,19 @@ public interface Stream<T> extends BaseStream<T, Stream<T>> {
 
 ```java
 public interface Collection<E> extends Iterable<E> {
+
+    default boolean removeIf(Predicate<? super E> filter) {
+        Objects.requireNonNull(filter);
+        boolean removed = false;
+        final Iterator<E> each = iterator();
+        while (each.hasNext()) {
+            if (filter.test(each.next())) {
+                each.remove();
+                removed = true;
+            }
+        }
+        return removed;
+    }
 
     // 重写自Iterable接口
     @Override
