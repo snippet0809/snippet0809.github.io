@@ -21,6 +21,7 @@ description: Mybatis-Plus框架
 @Data
 public class Order {
 
+    @TableId
     private Integer orderId;    // 订单号
     private Integer orderFee;   // 订单金额
 
@@ -39,7 +40,8 @@ public class OrderService {
     private OrderMapper orderMapper;
 
     public int queryTotalFee() {
-        Order order = orderMapper.selectOne(new LambdaQueryWrapper<Order>().select(Order::getTotal));
+        Order order = orderMapper.selectOne(new LambdaQueryWrapper<Order>()
+            .select(Order::getTotalFee));
         return order.getTotalFee();
     }
 }

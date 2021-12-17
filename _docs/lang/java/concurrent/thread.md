@@ -43,7 +43,7 @@ public class Thread implements Runnable {
 
     // 当前线程中调用其它线程的join()/join(final long millis)，当前线程让出CPU时间片转为WAITING/TIMED_WAITING，释放对象锁
     // 被调用join()的线程执行完毕或者millis时间到，当前线程一般会进入RUNNABLE，也有可能进入BLOCKED（因为join是基于wait实现的）
-    // join()和sleep()作用上最大区别是前者会释放对象锁，后者不会
+    // join()和sleep()作用上最大区别是前者（当前线程）会释放对象锁，后者不会
     public final void join() throws InterruptedException {
         join(0);
     }
@@ -87,7 +87,6 @@ public class Thread implements Runnable {
 
 ```java
 public static void mian(String[] args) {
-
     // 一、创建一个子线程去执行任务
     Thread thread = new Thread(() -> {
         // ...子线程任务逻辑省略...
