@@ -44,6 +44,7 @@ description: 日复一日，必有精进
 
 ## 三、中间件
 
+- [web服务器：Nginx](middleware/nginx)
 - 消息队列：RocketMQ
 
 ## 四、网络基础
@@ -53,6 +54,7 @@ description: 日复一日，必有精进
 ## 五、编程工具
 
 - [Git](tools/git)
+- [GitHub Pages](tools/github_pages)
 - [GitHub Packages](tools/github_packages)
 
 ## 六、操作系统
