@@ -10,11 +10,15 @@ description: java.lang.ClassLoader
 
 ## 二、类加载器分类
 
-1. 启动类加载器（根类加载器）：JVM的一部分，使用C++编写，加载位于/jre/lib目录中或者被参数-Xbootclasspath所指定的目录下的核心Java类库，例如rt.jar
+1. 启动类加载器：又称根类加载器，JVM的一部分，使用C++编写，加载位于/jre/lib目录中或者被参数-Xbootclasspath所指定的目录下的核心Java类库，例如rt.jar
 2. 拓展类加载器：由sun.misc.Launcher$ExtClassLoader实现，加载位于/jre/lib/ext目录中的或者java.ext.dirs系统变量所指定的目录下的拓展类库
 3. 应用类加载器：由sun.misc.Launcher$AppClassLoader实现，加载用户路径(ClassPath)上所指定的类库
 
 ## 三、双亲委派机制
+
+应用类加载器的双亲为扩展类加载器，扩展类加载器的双亲为启动类加载器。
+
+在类加载的时候，系统会判断当前类是否已经被加载，如果被加载，就会直接返回可用的类，否则就会尝试加载。在尝试加载时，会先请求双亲处理，如果双亲处理失败，才会自己加载。**双亲委派机制防止了类重复加载。**
 
 ```java
 public abstract class ClassLoader {
@@ -62,7 +66,3 @@ public abstract class ClassLoader {
     // ***其它实现省略***
 }
 ```
-
-应用类加载器的双亲为扩展类加载器，扩展类加载器的双亲为启动类加载器。
-
-在类加载的时候，系统会判断当前类是否已经被加载，如果被加载，就会直接返回可用的类，否则就会尝试加载。在尝试加载时，会先请求双亲处理，如果双亲请求失败，则会自己加载。**双亲委派机制防止了类重复加载。**
