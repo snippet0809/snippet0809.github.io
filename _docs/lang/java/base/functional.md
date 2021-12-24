@@ -366,7 +366,7 @@ public interface Collection<E> extends Iterable<E> {
 public class StreamDemo {
 
     public void functionalProgramming(List<String> list) {
-        // list中是有任一元素满足Predicate就返回true
+        // list中是有任一元素满足Predicate::test()就返回true
         boolean contains = list.stream().anyMatch("abc"::equals);
     }
 }
