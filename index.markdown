@@ -34,7 +34,9 @@ description: 日复一日，必有精进
 ### GO
 
 1. 语言基础
-2. 并发编程
+    - [数组、字符串和切片](lang/go/base/array)
+    - [并发编程](lang/go/base/concurrent)
+2. CGO编程
 3. gRPC & ProtoBuf
 
 ## 二、数据库
@@ -50,6 +52,7 @@ description: 日复一日，必有精进
 ## 四、网络基础
 
 - TCP/IP协议簇
+- Http协议
 
 ## 五、编程工具
 
@@ -60,7 +63,7 @@ description: 日复一日，必有精进
 ## 六、操作系统
 
 1. Linux
-    - [常用命令](os/linux/cmd)
+    - [常用命令](os/Linux/cmd)
 2. MacOS
 3. Windows
     - [重装系统](https://upe.net)
