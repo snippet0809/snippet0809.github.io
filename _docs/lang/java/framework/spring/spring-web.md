@@ -1,6 +1,6 @@
 ---
-title: Spring Boot
-description: Spring Boot
+title: Spring Web
+description: Spring Web
 ---
 
 ## 全局异常处理
