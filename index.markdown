@@ -29,10 +29,11 @@ description: 日复一日，必有精进
 4. 框架
     - [Mybatis-Plus](lang/java/framework/mybatis-plus)
     - Spring Framework
-        - [spring-core](lang/java/framework/spring/spring-core)
-        - [spring-beans：Spring Bean的定义、解析和创建](lang/java/framework/spring/spring-beans)
-        - [spring-context：缓存等](lang/java/framework/spring/spring-context)
-        - [spring-web：异常处理等](lang/java/framework/spring/spring-web)
+        - [spring-core：Spring工具集](lang/java/framework/spring/spring-core)
+        - [spring-beans：Spring IoC容器](lang/java/framework/spring/spring-beans)
+        - [spring-context：加强版的Spring IoC容器](lang/java/framework/spring/spring-context)
+        - [spring-web：为web项目开发提供强力支持](lang/java/framework/spring/spring-web)
+        - [spring-aop：面向切面编程](lang/java/framework/spring/spring-aop)
     - Spring Cloud
 
 ### GO

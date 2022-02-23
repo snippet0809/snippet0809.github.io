@@ -3,7 +3,20 @@ title: Spring Web
 description: Spring Web
 ---
 
-## 全局异常处理
+## 一、spring-web项目结构
+
+spring-web-5.1.8.RELEASE
+
+- org.springframework
+  - http
+  - remoting
+  - web
+    - bind
+      - annotation
+        - @RestController注解
+        - @RequestMapping注解
+
+## 二、全局异常处理
 
 ```java
 @RestController
