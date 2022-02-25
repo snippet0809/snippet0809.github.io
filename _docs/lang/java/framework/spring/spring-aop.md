@@ -20,8 +20,8 @@ spring-aop-5.1.8.REALEASE
 
 ## 二、JDK代理和CGLIB代理
 
-- JDK代理：只能对实现了接口的类生成代理，原理是利用反射机制生成一个实现了接口的匿名类
-- CGLIB代理：动态修改字节码生成子类
+- JDK代理：基于标准JAVA接口的代理（standard Java interface-based proxies）。只能对实现了接口的类生成代理，原理是利用反射机制生成一个实现了接口的匿名类
+- CGLIB代理：基于子类的代理（subclass-based proxies）。原理是通过动态修改字节码生成一个目标类的子类
 
 在Spring AOP中，如果目标类实现了接口，则Spring默认使用JDK代理，否则默认使用CGLIB代理
 
