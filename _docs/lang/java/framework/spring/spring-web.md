@@ -139,5 +139,3 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 - 优势：代码优雅。通常WebMvcConfigurer接口的多个方法都会被重写，放在一个类看着很舒服，代码高可读、易维护
 - 劣势：作用于Mapping层面，即只对进入Controller的请求起作用，在Intercepter的preHandle()中返回false时就无能为力了
-
-> request -> servlet filter -> spring mvc intercepter -> requestMapping
