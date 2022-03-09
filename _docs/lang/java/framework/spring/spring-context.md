@@ -3,7 +3,7 @@ title: spring-context
 description: cache等
 ---
 
-## 一、spring-context项目结构
+spring-context--5.1.8.RELEASE
 
 - org.springframework
   - cache
@@ -15,7 +15,7 @@ description: cache等
     - @Service
     - @Repository
 
-## 二、Spring缓存
+## 一、Spring缓存
 
 ### 1、本地缓存
 
@@ -46,7 +46,7 @@ public class CacheConfig {
 }
 ```
 
-如果项目引入了Spring-boot-starter-data-redis包，即使没有Redis相关配置，spring也会优先创建RedisCacheManager(RedisConnectionFactory("localhost", 6379))来作为默认的CacheManager
+如果项目引入了Spring-boot-starter-data-redis且未创建CacheManager类型的Spring Bean，spring会创建RedisCacheManager(RedisConnectionFactory("localhost", 6379))来作为默认的CacheManager
 
 ### 2、Redis缓存
 
