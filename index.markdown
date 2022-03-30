@@ -23,7 +23,7 @@ description: 日复一日，必有精进
     - [JDK1.5并发锁：java.util.concurrent.locks包](lang/java/concurrent/jdk5-J.U.C.locks)
     - [JDK1.6关键字：synchronized（jdk早期就已诞生，jdk1.6得到重大加强）](lang/java/concurrent/jdk6-synchronized)
     - [JDK1.7分与合：java.util.concurrent.ForkJoinPool（Fork/Join框架）](lang/java/concurrent/jdk7-J.U.C.ForkJoinPool)
-3. JVM
+3. JVM（JDK1.3特性：JAVA API改动极小，主要是将HotSpot作为默认JVM）
     - 内存分配
     - [垃圾收集](lang/java/jvm/GC)
 4. 框架
