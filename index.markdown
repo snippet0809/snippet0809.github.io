@@ -49,6 +49,7 @@ description: 日复一日，必有精进
 ## 二、数据库
 
 1. MySQL
+    - [乐观锁和悲观锁的实现](database/mysql/lock)
 2. Redis
 
 ## 三、中间件
