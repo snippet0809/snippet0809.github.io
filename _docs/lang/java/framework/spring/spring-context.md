@@ -55,6 +55,21 @@ public class CacheConfig {
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
+
+    <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <executions>
+            <execution>
+                <goals>
+                    <!-- spring-boot:build-info 生成jar包时会记录构建信息，Spring容器启动后会有一个BuildProperties类型的Bean -->
+                    <goal>build-info</goal>
+                    <!-- spring-boot:repackage 创建自动可执行的jar包 -->
+                    <goal>repackage</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
 ```
 
 ```java
@@ -66,12 +81,25 @@ public class RedisConfig {
     private static final String REDIS_PASSWORD = "";
 
     /**
+     * 本地缓存配置
+     * <p>
+     * 本地启动使用ConcurrentMapCacheManager，生产环境使用RedisCacheManager。
+     * 虽然Spring就是用ConcurrentMapCacheManager作为默认的CacheManager，但此时必须显示配置，
+     * 因为项目引入了Spring-boot-starter-data-redis包，即使没有Redis相关配置，
+     * Spring也会优先创建RedisCacheManager(RedisConnectionFactory("localhost", 6379))作为默认的CacheManager
+     */
+    @Bean
+    @Profile("default")
+    public CacheManager concurrentMapCacheManager(RedisConnectionFactory factory) {
+        return new ConcurrentMapCacheManager();
+    }
+
+    /**
      * Redis连接配置（个人讨厌配置文件方式）
      * <p>
      * 注意：虽然此处Redis的作用仅仅是为CacheManager打工，但下面的cacheManager方法不可直接调用此方法，
      * 而应该把RedisConnectionFactory以Spring Bean的形式注入，除非主动调用LettuceConnectionFactory::afterPropertiesSet()，
      * 没错，就是重写自Spring-Beans项目InitializingBean接口的afterPropertiesSet()。
-     * 说到这里，dddd
      */
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
@@ -85,9 +113,13 @@ public class RedisConfig {
      * redis缓存配置
      */
     @Bean
-    public CacheManager cacheManager(RedisConnectionFactory factory) {
+    @Profile("prod")
+    public CacheManager cacheManager(RedisConnectionFactory factory, @Autowired(required = false) BuildProperties buildProperties) {
+        // 虽然生产环境一定是通过jar包启动的，但是个人强迫症晚期，这里还是加了判空
+        String version = buildProperties == null ? "unknown" : buildProperties.getVersion();
         RedisCacheConfiguration cacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(5));
+                .computePrefixWith(cacheName -> version + "-" + cacheName + "::")
+                .entryTtl(Duration.ofMinutes(15));
         return RedisCacheManager.builder(factory).cacheDefaults(cacheConfiguration).build();
     }
 }
