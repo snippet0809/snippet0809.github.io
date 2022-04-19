@@ -23,7 +23,7 @@ description: 日复一日，必有精进
     - [JDK1.5并发锁：java.util.concurrent.locks包](lang/java/concurrent/jdk5-J.U.C.locks)
     - [JDK1.6关键字：synchronized（jdk早期就已诞生，jdk1.6得到重大加强）](lang/java/concurrent/jdk6-synchronized)
     - [JDK1.7分与合：java.util.concurrent.ForkJoinPool（Fork/Join框架）](lang/java/concurrent/jdk7-J.U.C.ForkJoinPool)
-3. JVM（JDK1.3特性：JAVA API改动极小，主要是将HotSpot作为默认JVM）
+3. JVM（JDK1.3特性：API改动极小，主要是将HotSpot作为默认JVM）
     - 内存分配
     - [垃圾收集](lang/java/jvm/GC)
 4. 框架
@@ -31,10 +31,10 @@ description: 日复一日，必有精进
     - Spring Framework
         - [spring-core：Spring工具集](lang/java/framework/spring/spring-core)
         - [spring-beans：Spring IoC容器](lang/java/framework/spring/spring-beans)
-        - [spring-context：加强版的Spring IoC容器](lang/java/framework/spring/spring-context)
-        - [spring-aop：面向切面编程](lang/java/framework/spring/spring-aop)
+        - [spring-context：加强版的IoC容器、缓存](lang/java/framework/spring/spring-context)
         - [spring-web：参数绑定、异常处理、跨域配置等](lang/java/framework/spring/spring-web)
         - [spring-webmvc：Intercepter等](lang/java/framework/spring/spring-webmvc)
+        - [spring-aop：面向切面编程](lang/java/framework/spring/spring-aop)
         - [spring-tx：Spring事务管理](lang/java/framework/spring/spring-tx)
     - Spring Cloud
 

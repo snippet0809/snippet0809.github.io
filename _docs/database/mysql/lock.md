@@ -19,5 +19,5 @@ description: 乐观锁和悲观锁的实现
 注意：
 
 - FOR UPDATE是排它锁，一旦加锁，其它操作只能等待
-- FOR UPDATE命中索引是锁行，没有命中索引会锁表
+- FOR UPDATE命中主键或唯一性约束是锁行，否则锁表
 - 仅适用于InnoDB，且必须在事务中(BEGIN/COMMIT)才能生效
