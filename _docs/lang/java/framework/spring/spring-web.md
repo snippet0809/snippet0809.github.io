@@ -16,6 +16,8 @@ spring-web-5.1.8.RELEASE
         - @RequestMapping注解
         - @ResponseStatus注解
         - @ExceptionHandler注解
+    - client
+      - RestTemplate类
     - context
       - request
         - RequestContextHolder抽象类
@@ -139,3 +141,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
 - 优势：代码优雅。通常WebMvcConfigurer接口的多个方法都会被重写，放在一个类看着很舒服，代码高可读、易维护
 - 劣势：作用于Mapping层面，即只对进入Controller的请求起作用，在Intercepter的preHandle()中返回false时就无能为力了
+
+## 二、RestTemplate
+
+getForObject()和getForEntity()的区别：前者只返回响应体，后者返回整个响应包（响应头、响应体等）
