@@ -46,6 +46,10 @@ description: 日复一日，必有精进
 2. CGO编程
 3. gRPC & ProtoBuf
 
+### javascript
+
+1. nodejs[lang/js/node]
+
 ## 二、数据库
 
 1. MySQL
