@@ -48,7 +48,7 @@ description: 日复一日，必有精进
 
 ### javascript
 
-1. nodejs[lang/js/node]
+1. [nodejs](lang/js/node)
 
 ## 二、数据库
 
