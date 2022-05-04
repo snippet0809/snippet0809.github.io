@@ -75,7 +75,7 @@ description: 日复一日，必有精进
 ## 六、操作系统
 
 1. Linux
-    - [常用命令](os/Linux/cmd)
+    - [常用命令](os/linux/cmd)
 2. MacOS
 3. Windows
     - [重装系统](https://upe.net)
