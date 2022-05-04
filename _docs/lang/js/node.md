@@ -11,7 +11,7 @@ description: nodejs
 2. 设置镜像：`npm config set registry https://registry.npmmirror.com`
 3. 取消镜像：`npm config set registry https://registry.npmjs.org`
 
-### 2、[cnpm](https://npmmirror.com)
+### 2、使用cnpm（详细教程：<https://npmmirror.com>）
 
 除了替换registry，也可以通过使用cnpm实现相同效果
 
