@@ -1,6 +1,6 @@
 ---
 title: spring-context
-description: cache等
+description: ApplicationContext接口、cache等
 ---
 
 spring-context--5.1.8.RELEASE
@@ -19,6 +19,8 @@ spring-context--5.1.8.RELEASE
 
 ### 1、本地缓存
 
+Spring默认的CacheManager为ConcurrentMapCacheManager，但它不支持缓存自动过期。
+
 ```xml
     <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -34,9 +36,6 @@ spring-context--5.1.8.RELEASE
 @Configuration
 public class CacheConfig {
 
-    /**
-     * Spring会使用ConcurrentMapCacheManager来作为默认的CacheManager，但它不支持缓存过期
-     */
     @Bean
     public CacheManager cacheManager() {
        CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
@@ -46,11 +45,11 @@ public class CacheConfig {
 }
 ```
 
-如果项目引入了Spring-boot-starter-data-redis且未创建CacheManager类型的Spring Bean，spring会创建RedisCacheManager(RedisConnectionFactory("localhost", 6379))来作为默认的CacheManager
-
 ### 2、Redis缓存
 
 ```xml
+    <!-- 如果项目引入了Spring-boot-starter-data-redis且未显式指定CacheManager，
+        spring会自动创建RedisCacheManager(RedisConnectionFactory("localhost", 6379))来作为默认的CacheManager -->
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -64,7 +63,7 @@ public class CacheConfig {
                 <goals>
                     <!-- spring-boot:build-info 生成jar包时会记录构建信息，Spring容器启动后会有一个BuildProperties类型的Bean -->
                     <goal>build-info</goal>
-                    <!-- spring-boot:repackage 创建自动可执行的jar包 -->
+                    <!-- spring-boot:repackage 打包成可执行的jar，没有这个需要显式指定启动类 -->
                     <goal>repackage</goal>
                 </goals>
             </execution>
@@ -81,20 +80,6 @@ public class RedisConfig {
     private static final String REDIS_PASSWORD = "";
 
     /**
-     * 本地缓存配置
-     * <p>
-     * 本地启动使用ConcurrentMapCacheManager，生产环境使用RedisCacheManager。
-     * 虽然Spring就是用ConcurrentMapCacheManager作为默认的CacheManager，但此时必须显示配置，
-     * 因为项目引入了Spring-boot-starter-data-redis包，即使没有Redis相关配置，
-     * Spring也会优先创建RedisCacheManager(RedisConnectionFactory("localhost", 6379))作为默认的CacheManager
-     */
-    @Bean
-    @Profile("default")
-    public CacheManager concurrentMapCacheManager(RedisConnectionFactory factory) {
-        return new ConcurrentMapCacheManager();
-    }
-
-    /**
      * Redis连接配置（个人讨厌配置文件方式）
      * <p>
      * 注意：虽然此处Redis的作用仅仅是为CacheManager打工，但下面的cacheManager方法不可直接调用此方法，
@@ -103,7 +88,6 @@ public class RedisConfig {
      */
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
-        // 默认端口6379，默认没有密码
         RedisStandaloneConfiguration redisConfiguration = new RedisStandaloneConfiguration(REDIS_HOST, REDIS_PORT);
         redisConfiguration.setPassword(REDIS_PASSWORD);
         return new LettuceConnectionFactory(redisConfiguration);
@@ -113,9 +97,7 @@ public class RedisConfig {
      * redis缓存配置
      */
     @Bean
-    @Profile("prod")
     public CacheManager cacheManager(RedisConnectionFactory factory, @Autowired(required = false) BuildProperties buildProperties) {
-        // 虽然生产环境一定是通过jar包启动的，但是个人强迫症晚期，这里还是加了判空
         String version = buildProperties == null ? "unknown" : buildProperties.getVersion();
         RedisCacheConfiguration cacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
                 .computePrefixWith(cacheName -> version + "-" + cacheName + "::")
