@@ -33,7 +33,7 @@ description: 日复一日，必有精进
         - [spring-beans：Spring IoC容器](lang/java/framework/spring/spring-beans)
         - [spring-context：加强版的IoC容器、缓存](lang/java/framework/spring/spring-context)
         - [spring-web：参数绑定、异常处理、跨域配置等](lang/java/framework/spring/spring-web)
-        - [spring-webmvc：Intercepter等](lang/java/framework/spring/spring-webmvc)
+        - [spring-webmvc：WebMvcConfigurer接口、Intercepter等](lang/java/framework/spring/spring-webmvc)
         - [spring-aop：面向切面编程](lang/java/framework/spring/spring-aop)
         - [spring-tx：Spring事务管理](lang/java/framework/spring/spring-tx)
     - Spring Cloud
