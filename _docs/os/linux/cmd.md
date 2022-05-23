@@ -42,3 +42,8 @@ scp是secure copy的缩写，是基于ssh的文件拷贝命令
 lsof(list open files)是一个列出当前系统打开文件的工具
 
 lsof常用来查看端口占用：`lsof -i:{port}`
+
+## 三、用户相关
+
+查看用户列表：`less /etc/passwd`
+更改用户密码：`passwd ${username}`
