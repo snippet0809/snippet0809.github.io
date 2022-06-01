@@ -77,6 +77,7 @@ description: 日复一日，必有精进
 
 1. Linux
     - [常用命令](os/linux/cmd)
+    - [开发环境](os/linux/env)
 2. MacOS
 3. Windows
     - [重装系统](https://upe.net)
