@@ -6,7 +6,7 @@ date: 2022-06-01
 
 ## 一、shell脚本格式转化
 
-windows下编写的脚本，在linux上运行出现`$'\r': command not found`,是因为Windows的换行是`\r\n`，而linux时`\n`。
+Windows下编写的脚本，在Linux上运行出现`$'\r': command not found`,是因为Windows的换行是`\r\n`，而linux是`\n`。
 
 1. `yum install -y dos2unix`
 2. `dos2unix xxx.sh`
