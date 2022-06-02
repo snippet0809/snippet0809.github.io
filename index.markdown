@@ -56,6 +56,8 @@ description: 日复一日，必有精进
 1. MySQL
     - [乐观锁和悲观锁的实现](database/mysql/lock)
 2. Redis
+    - [基础](database/redis/base)
+    - [分布式](database/redis/distributed)
 
 ## 三、中间件
 
