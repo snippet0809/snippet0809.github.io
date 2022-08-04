@@ -46,4 +46,5 @@ lsof常用来查看端口占用：`lsof -i:{port}`
 ## 三、用户相关
 
 查看用户列表：`less /etc/passwd`
+
 更改用户密码：`passwd ${username}`
