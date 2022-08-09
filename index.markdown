@@ -74,6 +74,7 @@ description: 日复一日，必有精进
 - [Git](tools/git)
 - [GitHub Pages](tools/github_pages)
 - [GitHub Packages](tools/github_packages)
+- [ftp](tools/vsftpd)
 
 ## 六、操作系统
 
