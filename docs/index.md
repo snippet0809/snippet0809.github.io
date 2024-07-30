@@ -3,23 +3,29 @@
 layout: home
 
 hero:
-  name: "My Awesome Project"
-  text: "A VitePress Site"
-  tagline: My great project tagline
+  name: 编程备忘录
+  text: 
+  tagline: 日复一日，必有精进
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Operating System
+      link: 
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: TypeScript
+      link: 
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: Operating System
+    details: Windows、MacOS、Linux...
+  - title: TypeScript
+    details: TypeScript is JavaScript with syntax for types
+    link: 
+  - title: VueJs
+    details: The Progressive JavaScript Framework
+  - title: Java
+    details: Compile once, run anywhere
+  - title: Python
+    details: Life is short, use python
+  - title: C++
+    details: 
 ---
-

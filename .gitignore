@@ -1,1 +1,3 @@
 node_modules
+docs/.vitepress
+!docs/.vitepress/config.mts
