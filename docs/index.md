@@ -30,4 +30,6 @@ features:
     details: 
   - title: Android
     details:
+  - title: OpenCV
+    details:
 ---
