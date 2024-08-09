@@ -1,3 +1,9 @@
+### node ###
 node_modules
+
+### IDE ###
+.idea
+
+### vitepress ###
 docs/.vitepress
 !docs/.vitepress/config.mts
