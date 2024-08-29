@@ -2,6 +2,8 @@
 
 ## http和https同时生效
 
+Spring Boot默认开启http服务
+
 ### 1、https配置，使用代码配置比较麻烦
 
 ```yml

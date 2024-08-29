@@ -8,18 +8,30 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      // { text: 'Examples', link: '/markdown-examples' }
-    ],
-
-    sidebar: [
       {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+        text: 'Note', items: [
+          { text: 'OS', link: '/os/' },
+          { text: 'JAVA', link: '/java/' },
         ]
       }
     ],
+
+    sidebar: {
+      '/os/': [
+        { text: 'windows', link: '/os/windows' },
+        { text: 'linux', link: '/os/linux' }
+      ],
+      '/java/': [
+        { text: 'JDK' },
+        {
+          text: 'Spring Boot',
+          items: [
+            { text: 'tomcat配置', link: '/java/spring-boot/tomcat' },
+          ]
+        },
+        { text: 'Spring Cloud' },
+      ],
+    },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/snippet0809/snippet0809.github.io' }
