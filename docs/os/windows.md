@@ -20,14 +20,17 @@ cnpm : 无法加载文件 C:\Users\xxx\AppData\Roaming\npm\cnpm.ps1，因为在�
 ### 1、配置
 
 `git config --global http.proxy 127.0.0.1:7890`
+
 `git config --global https.proxy 127.0.0.1:7890`
 
 ### 2、查看
 
 `git config --global --get http.proxy`
+
 `git config --global --get https.proxy`
 
 ### 3、取消
 
 `git config --global --unset http.proxy`
+
 `git config --global --unset https.proxy`
