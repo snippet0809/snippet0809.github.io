@@ -14,3 +14,20 @@ cnpm : 无法加载文件 C:\Users\xxx\AppData\Roaming\npm\cnpm.ps1，因为在�
 
 - Restricted:可以执行单个命令，但不可以执行脚本（windows客户端计算机的默认策略）
 - RemoteSigned:本地自己写的脚本可以执行，从网络上下载的脚本必须有数字签名才能执行（windows服务器计算机的默认策略）
+
+## 三、Git配置代理
+
+### 1、配置
+
+`git config --global http.proxy 127.0.0.1:7890`
+`git config --global https.proxy 127.0.0.1:7890`
+
+### 2、查看
+
+`git config --global --get http.proxy`
+`git config --global --get https.proxy`
+
+### 3、取消
+
+`git config --global --unset http.proxy`
+`git config --global --unset https.proxy`
