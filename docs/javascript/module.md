@@ -10,7 +10,7 @@
 - require()返回的是一个拷贝，import导入的是引用
 - require()是一个同步函数，而import语句在静态分析阶段确认依赖关系，在合适的时机进行异步加载
 
-### 三、export和exprot default区别
+### 三、export和export default区别
 
 - `export`导出成员，导入时导入值需要放到`{}`里面
 - `export default`只能有一个，导入时导入值不用放到`{}`里面
