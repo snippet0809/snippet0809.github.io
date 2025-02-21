@@ -1,7 +1,4 @@
----
-title: Nginx
-description: Nginx
----
+# Nginx
 
 ## 常用命令
 

@@ -12,7 +12,7 @@ export default defineConfig({
         text: 'Note', items: [
           { text: 'OS', link: '/os/' },
           { text: 'JAVA', link: '/java/' },
-          { text: 'JavaScript', link: '/javascript/module' }
+          { text: 'JavaScript', link: '/javascript/' }
         ]
       }
     ],
@@ -33,7 +33,8 @@ export default defineConfig({
         { text: 'Spring Cloud' },
       ],
       '/javascript/': [
-        { text: '模块化', link: '/javascript/module' }
+        { text: '模块化', link: '/javascript/module' },
+        { text: 'Nginx', link: '/javascript/nginx' },
       ]
     },
 
